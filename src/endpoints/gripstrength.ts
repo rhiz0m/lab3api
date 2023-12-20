@@ -6,9 +6,9 @@ const PORT: number = 3002
 
 // Interfaces
 interface GripStrength {
-  name: string
-  date: String
-  description: String
+  title: string
+  muscleGroups: string[]
+  equipment: string[]
   exercises: GripExercises[]
 }
 
@@ -20,33 +20,35 @@ interface GripExercises {
 }
 
 app.get("/gripstrength", (req: Request, res: Response) => {
-  const queryName: string = (req.query.name as string) || "Grip Strength"
+  const queryTitle: string =
+    (req.query.title as string) || "Grip Strength"
 
   const gripStrength: GripStrength = {
-    name: queryName,
-    date: "2023-12-24",
-    description: "functional training",
+    title: queryTitle,
+    muscleGroups: ["Musclegroup 1", "Musclegroup 2"],
+    equipment: ["Blob", "Other"],
     exercises: [
       {
-        name: "Grip 1",
+        name: "Grip Exercise 1",
         weight: [20, 40, 60],
         reps: [3, 4, 5],
         sets: [2, 2, 1],
       },
       {
-        name: "Grip 2",
-        weight: [6, 80, 100],
+        name: "Grip Exercise 2",
+        weight: [60, 80, 100],
         reps: [5, 5, 5, 5, 5],
         sets: [1, 1, 1, 1, 1],
       },
       {
-        name: "Grip 3",
+        name: "Grip Exercise 3",
         weight: [100, 120, 150],
         reps: [2, 2, 2, 2, 2, 2],
         sets: [1, 1, 1, 1, 1, 1],
       },
     ],
   }
+
 
   res.json(gripStrength)
 })

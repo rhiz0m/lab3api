@@ -6,9 +6,9 @@ const PORT: number = 3003
 
 // Interfaces
 interface StoneStrength {
-  name: string
-  date: String
-  description: String
+  title: string
+  muscleGroups: string[]
+  equipment: string[]
   exercises: StoneExercises[]
 }
 
@@ -20,27 +20,27 @@ interface StoneExercises {
 }
 
 app.get("/stonestrength", (req: Request, res: Response) => {
-  const queryName: string = (req.query.name as string) || "Stone Strength"
+  const queryTitle: string = (req.query.title as string) || "Stone Lifting"
 
   const stoneStrength: StoneStrength = {
-    name: queryName,
-    date: "2023-12-24",
-    description: "functional training",
+    title: queryTitle,
+    muscleGroups: ["Musclegroup 1", "Musclegroup 2"],
+    equipment: ["Natural Stone", "Atlas Stone"],
     exercises: [
       {
-        name: "Stone 1",
+        name: "Stone Exercise 1",
         weight: [20, 40, 60],
         reps: [3, 4, 5],
         sets: [2, 2, 1],
       },
       {
-        name: "Stone 2",
-        weight: [6, 80, 100],
+        name: "Stone Exercise 2",
+        weight: [60, 80, 100],
         reps: [5, 5, 5, 5, 5],
         sets: [1, 1, 1, 1, 1],
       },
       {
-        name: "Stone 3",
+        name: "Stone Exercise 3",
         weight: [100, 120, 150],
         reps: [2, 2, 2, 2, 2, 2],
         sets: [1, 1, 1, 1, 1, 1],

@@ -5,27 +5,28 @@ app.use(express.json())
 const PORT: number = 3001
 
 // Interfaces
-interface OldTimeStrong {
-  name: string
-  date: String
-  description: String
-  exercises: OldTimeExercises[]
+interface OTStrong {
+  title: string
+  muscleGroups: string[]
+  equipment: string[]
+  exercises: OTExercises[]
 }
 
-interface OldTimeExercises {
+interface OTExercises {
   weight: number[]
   name: string
   reps: number[]
   sets: number[]
 }
 
-app.get("/oldtimestrong", (req: Request, res: Response) => {
-  const queryName: string = (req.query.name as string) || "Old Time Strong Man"
+app.get("/otstrong", (req: Request, res: Response) => {
+  const queryTitle: string =
+    (req.query.title as string) || "Old Time Strong Man"
 
-  const oldTimeStrong: OldTimeStrong = {
-    name: queryName,
-    date: "2023-12-24",
-    description: "functional training",
+  const otStrong: OTStrong = {
+    title: queryTitle,
+    muscleGroups: ["Musclegroup 1", "Musclegroup 2"],
+    equipment: ["Kettlebell", "Barbell"],
     exercises: [
       {
         name: "Bentpress",
@@ -35,7 +36,7 @@ app.get("/oldtimestrong", (req: Request, res: Response) => {
       },
       {
         name: "Zercher Squats",
-        weight: [6, 80, 100],
+        weight: [60, 80, 100],
         reps: [5, 5, 5, 5, 5],
         sets: [1, 1, 1, 1, 1],
       },
@@ -48,28 +49,28 @@ app.get("/oldtimestrong", (req: Request, res: Response) => {
     ],
   }
 
-  res.json(oldTimeStrong)
+  res.json(otStrong)
 })
 
 // Query Post + Body -Practice
 
 app.post("/oldtimestrong", (req: Request, res: Response) => {
-  const oldTimeStrong: OldTimeStrong = req.body
+  const oldTimeStrong: OTStrong = req.body
 
   res.status(201).json(oldTimeStrong)
 
   console.log(oldTimeStrong)
 })
 
-app.put("/oldtimestrong/:name", (req: Request, res: Response) => {
-  const updateName: string = req.params.name
-  const updatedOldTimeStrong: OldTimeStrong = req.body
+app.put("/oldtimestrong/:title", (req: Request, res: Response) => {
+  const updateTitle: string = req.params.title
+  const updatedOldTimeStrong: OTStrong = req.body
 
-  res.status(200).json(updatedOldTimeStrong)
+  res.status(204).json(updatedOldTimeStrong)
 })
 
-app.delete("/oldtimestrong/:name", (req: Request, res: Response) => {
-  const nameToDelete: string = req.params.name
+app.delete("/oldtimestrong/:title", (req: Request, res: Response) => {
+  const titleToDelete: string = req.params.title
 
   res.status(204).send()
 })

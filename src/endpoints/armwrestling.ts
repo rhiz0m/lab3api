@@ -6,13 +6,13 @@ const PORT: number = 3004
 
 // Interfaces
 interface ArmWrestling {
-  name: string
-  date: String
-  description: String
-  exercises: ArmwrestlingExercises[]
+  title: string
+  muscleGroups: string[]
+  equipment: string[]
+  exercises: ArmWrestlingExercises[]
 }
 
-interface ArmwrestlingExercises {
+interface ArmWrestlingExercises {
   weight: number[]
   name: string
   reps: number[]
@@ -20,12 +20,12 @@ interface ArmwrestlingExercises {
 }
 
 app.get("/armwrestling", (req: Request, res: Response) => {
-  const queryName: string = (req.query.name as string) || "Arm Wrestling"
+  const queryTitle: string = (req.query.title as string) || "Armwrestling Page"
 
   const armWrestling: ArmWrestling = {
-    name: queryName,
-    date: "2023-12-24",
-    description: "functional training",
+    title: queryTitle,
+    muscleGroups: ["Musclegroup 1", "Musclegroup 2"],
+    equipment: ["Equip 1", "Equip 2"],
     exercises: [
       {
         name: "Exercise 1",
@@ -35,7 +35,7 @@ app.get("/armwrestling", (req: Request, res: Response) => {
       },
       {
         name: "Exercise 2",
-        weight: [6, 80, 100],
+        weight: [60, 80, 100],
         reps: [5, 5, 5, 5, 5],
         sets: [1, 1, 1, 1, 1],
       },
