@@ -22,10 +22,18 @@ interface ArmWrestlingExercises {
 app.get("/armwrestling", (req: Request, res: Response) => {
   const queryTitle: string = (req.query.title as string) || "Armwrestling Page"
 
+    const queryMuscleGroups: string[] = (req.query
+      .muscleGroups as string[]) || ["Musclegroup 1", "Musclegroup 2"]
+
+    const queryEquip: string[] = (req.query.equipment as string[]) || [
+      "Equip 1",
+      "Equip 2",
+    ]
+
   const armWrestling: ArmWrestling = {
     title: queryTitle,
-    muscleGroups: ["Musclegroup 1", "Musclegroup 2"],
-    equipment: ["Equip 1", "Equip 2"],
+    muscleGroups: queryMuscleGroups,
+    equipment: queryEquip,
     exercises: [
       {
         name: "Exercise 1",

@@ -22,10 +22,20 @@ interface StoneExercises {
 app.get("/stonestrength", (req: Request, res: Response) => {
   const queryTitle: string = (req.query.title as string) || "Stone Lifting"
 
+  const queryMuscleGroups: string[] = (req.query.muscleGroups as string[]) || [
+    "Musclegroup 1",
+    "Musclegroup 2",
+  ]
+
+  const queryEquip: string[] = (req.query.equipment as string[]) || [
+    "Equip 1",
+    "Equip 2",
+  ]
+
   const stoneStrength: StoneStrength = {
     title: queryTitle,
-    muscleGroups: ["Musclegroup 1", "Musclegroup 2"],
-    equipment: ["Natural Stone", "Atlas Stone"],
+    muscleGroups: queryMuscleGroups,
+    equipment: queryEquip,
     exercises: [
       {
         name: "Stone Exercise 1",

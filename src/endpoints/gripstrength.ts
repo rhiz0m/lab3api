@@ -23,10 +23,18 @@ app.get("/gripstrength", (req: Request, res: Response) => {
   const queryTitle: string =
     (req.query.title as string) || "Grip Strength"
 
+      const queryMuscleGroups: string[] = (req.query
+        .muscleGroups as string[]) || ["Musclegroup 1", "Musclegroup 2"]
+
+      const queryEquip: string[] = (req.query.equipment as string[]) || [
+        "Equip 1",
+        "Equip 2",
+      ]
+
   const gripStrength: GripStrength = {
     title: queryTitle,
-    muscleGroups: ["Musclegroup 1", "Musclegroup 2"],
-    equipment: ["Blob", "Other"],
+    muscleGroups: queryMuscleGroups,
+    equipment: queryEquip,
     exercises: [
       {
         name: "Grip Exercise 1",
