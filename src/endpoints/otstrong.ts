@@ -1,23 +1,13 @@
-import express, { Request, Response } from "express"
+import dotenv from "dotenv"
+import express, { NextFunction, Request, Response } from "express"
+import { OTStrongModel } from "../../utils/models/otstrong_models"
+import { OTStrong } from "../../utils/types/otstrong_type"
+
+dotenv.config({ path: ".env.local" })
 
 const app = express()
 app.use(express.json())
 const PORT: number = 3001
-
-// Interfaces
-interface OTStrong {
-  title: string
-  muscleGroups: string[]
-  equipment: string[]
-  exercises: OTExercises[]
-}
-
-interface OTExercises {
-  weight: number[]
-  name: string
-  reps: number[]
-  sets: number[]
-}
 
 app.get("/otstrong", (req: Request, res: Response) => {
   const queryTitle: string =
@@ -62,27 +52,28 @@ app.get("/otstrong", (req: Request, res: Response) => {
   res.json(otStrong)
 })
 
-// Query Post + Body -Practice
+app.post("/otstrong", (req: Request, res: Response) => {
+  const otstrong: OTStrong = req.body
 
-app.post("/oldtimestrong", (req: Request, res: Response) => {
-  const oldTimeStrong: OTStrong = req.body
+  res.status(201).json(otstrong)
 
-  res.status(201).json(oldTimeStrong)
-
-  console.log(oldTimeStrong)
+  console.log(otstrong)
 })
 
-app.put("/oldtimestrong/:title", (req: Request, res: Response) => {
+app.put("/otstrong/:title", (req: Request, res: Response) => {
   const updateTitle: string = req.params.title
   const updatedOldTimeStrong: OTStrong = req.body
 
   res.status(200).json(updatedOldTimeStrong)
 })
 
-app.delete("/oldtimestrong/:title", (req: Request, res: Response) => {
+app.delete("/otstrong/:title", (req: Request, res: Response) => {
   const titleToDelete: string = req.params.title
 
   res.status(204).send()
 })
 
 export default app
+function next(error: any) {
+  throw new Error("Function not implemented.")
+}

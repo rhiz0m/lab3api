@@ -3,10 +3,9 @@ import { rateLimitMiddleware } from "./limitMiddleware"
 
 // Specify CORS options
 const corsOptions = {
-  origin: "http://localhost:3000", // Replace with your frontend's origin
+  origin: "http://localhost:3000", 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Enable credentials (e.g., cookies, authorization headers)
+  credentials: true, 
 }
 
-// Export the configured CORS middleware
 export const corsMiddleware = [cors(corsOptions), rateLimitMiddleware]
