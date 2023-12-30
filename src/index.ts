@@ -2,7 +2,7 @@
 import express, { Request, Response } from "express"
 import { corsMiddleware } from "./middlewares/corsMiddleware"
 import { rateLimitMiddleware } from "./middlewares/limitMiddleware"
-import oldTimeStrong from "./endpoints/otstrong"
+import otStrong from "./endpoints/otstrong"
 import gripStrength from "./endpoints/gripstrength"
 import stoneStrength from "./endpoints/stonestrength"
 import armWrestling from "./endpoints/armwrestling"
@@ -14,7 +14,7 @@ app.use(corsMiddleware)
 app.use(rateLimitMiddleware)
 app.use(express.json())
 
-app.use("/", oldTimeStrong)
+app.use("/", otStrong)
 app.use("/", gripStrength)
 app.use("/", stoneStrength)
 app.use("/", armWrestling)

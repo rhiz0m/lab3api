@@ -4,7 +4,7 @@ dotenv.config({ path: ".env.local" })
 import mongoose from "mongoose"
 import { OTStrongModel } from "./utils/models/otstrong_models"
 
-async function insertMinimalTestDocument() {
+async function insertTestDocument() {
   try {
     // Ensure MONGODB_URI is defined
     if (!process.env.MONGODB_URI) {
@@ -14,8 +14,7 @@ async function insertMinimalTestDocument() {
     // Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI)
 
-    // Define the minimal test document
-    const minimalTestDocument = {
+    const testDocument = {
       title: "Old Time Strong Man Training",
       muscleGroups: ["Group1, group2, group 3"],
       equipment: ["Equip 1, Equip 2"],
@@ -41,9 +40,8 @@ async function insertMinimalTestDocument() {
       ],
     }
 
-    // Create the minimal test document
     const createdMinimalTestDocument = await OTStrongModel.create(
-      minimalTestDocument
+      testDocument
     )
     console.log(
       "Minimal test document saved successfully:",
@@ -52,10 +50,8 @@ async function insertMinimalTestDocument() {
   } catch (error) {
     console.error("Error saving minimal test document to MongoDB:", error)
   } finally {
-    // Close the connection explicitly
     await mongoose.connection.close()
   }
 }
 
-// Call the function to insert the minimal test document
-insertMinimalTestDocument()
+insertTestDocument()

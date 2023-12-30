@@ -1,13 +1,15 @@
+
 import dotenv from "dotenv"
-import express, { NextFunction, Request, Response } from "express"
+import express, { Request, Response } from "express"
 import { OTStrongModel } from "../../utils/models/otstrong_models"
 import { OTStrong } from "../../utils/types/otstrong_type"
 
 dotenv.config({ path: ".env.local" })
 
 const app = express()
+const PORT: number = 3000
+
 app.use(express.json())
-const PORT: number = 3001
 
 app.get("/otstrong", (req: Request, res: Response) => {
   const queryTitle: string =
@@ -58,7 +60,7 @@ app.post("/otstrong", (req: Request, res: Response) => {
   res.status(201).json(otstrong)
 
   console.log(otstrong)
-})
+}) 
 
 app.put("/otstrong/:title", (req: Request, res: Response) => {
   const updateTitle: string = req.params.title
@@ -77,3 +79,4 @@ export default app
 function next(error: any) {
   throw new Error("Function not implemented.")
 }
+
